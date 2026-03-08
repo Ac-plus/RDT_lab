@@ -18,6 +18,9 @@ In terms of protocol design and implementation, by reading the experiment manual
 
 The general rule of Stop-and-Wait is as follows: when the two communicating parties exchange data, after the receiver correctly receives a data packet from the sender, it needs to send an acknowledgment message (ACK) back to the sender to confirm that the data has been received. After sending one packet, the sender stops and waits until it receives the acknowledgment from the receiver before sending the next packet, as shown in Figure 2-1. The Stop-and-Wait protocol in this experiment is intended to simulate the above behavior.
 
+<img width="1023" height="392" alt="image" src="https://github.com/user-attachments/assets/376d8bd3-dbb5-42fe-ad95-6822d8fe1696" />
+
+
 **Figure 2-1** Schematic diagram of the Stop-and-Wait protocol rules
 
 #### 2.1.2 Protocol Application Scenarios
@@ -29,6 +32,9 @@ Because the RDT Stop-and-Wait protocol checks whether the other side has receive
 #### 2.2.1 Protocol Working Requirements
 
 As shown in Figure 1-2, the general rule of Go-Back-N is as follows: under normal conditions, the sender sends data packets to the receiver; after receiving a packet, the receiver returns an ACK to the sender; once the sender receives the ACK, it can continue sending data. However, once the receiver detects that the received data are out of order, the sender must retransmit all unacknowledged packets after the last correctly received packet.
+
+
+<img width="1113" height="248" alt="image" src="https://github.com/user-attachments/assets/0ad0328c-fe23-41a7-b0a3-2d0bdafe8a93" />
 
 **Figure 1-2** Schematic diagram of the Go-Back-N protocol
 
@@ -142,6 +148,8 @@ B is the simulated receiver in the Stop-and-Wait implementation. Its data struct
 #### 3.2.5 Buffer
 
 The buffer is a newly defined data structure similar to a circular array and queue, required in the implementation of the Go-Back-N protocol to store packets, as shown in Figure 3-9.
+
+<img width="1099" height="245" alt="image" src="https://github.com/user-attachments/assets/168f1df2-151d-4eaa-9ab9-f16d766fcca7" />
 
 **Figure 3-9** Schematic diagram of the packet buffer structure
 
@@ -388,6 +396,8 @@ Network simulation tests were conducted on the Stop-and-Wait protocol. The input
 
 Set the first parameter to 20, the second parameter (packet loss rate) and the third parameter (corruption rate) to 0, the fourth parameter to 1000 (that is, a time interval of 1 s), and the fifth parameter `trace` to its default value 2. The following result segment is obtained:
 
+<img width="764" height="412" alt="image" src="https://github.com/user-attachments/assets/ad6dabf1-20a8-41a9-bc55-2389b7908881" />
+
 **Figure 5-1** Test result with no error and no loss
 
 It can be seen that 20 data packets were successfully sent, and all were correctly transmitted and received. The yellow mark indicates that A sent one packet, and the green mark indicates that B correctly received that packet.
@@ -396,7 +406,11 @@ It can be seen that 20 data packets were successfully sent, and all were correct
 
 Based on the input of Section 5.1.1, change the corruption rate to 0.5 while keeping the other inputs unchanged, and the following result is obtained:
 
+<img width="766" height="319" alt="image" src="https://github.com/user-attachments/assets/e7772117-d937-4c5c-8213-18d6411174d2" />
+
 (a)
+
+<img width="765" height="246" alt="image" src="https://github.com/user-attachments/assets/e0ba3f6e-d851-491c-a5f6-cc28e6eb79c7" />
 
 (b)
 
@@ -408,7 +422,11 @@ From Figures (a) and (b), it can be seen that some packets were corrupted, resul
 
 Based on the input of Section 5.1.1, change the packet loss rate to 0.5 while keeping the other inputs unchanged, and the following result is obtained:
 
+<img width="762" height="278" alt="image" src="https://github.com/user-attachments/assets/164513f0-eef2-40bc-8be6-81349701f1a7" />
+
 (a)
+
+<img width="765" height="200" alt="image" src="https://github.com/user-attachments/assets/b9143377-059f-4973-8a57-d02824e8984f" />
 
 (b)
 
@@ -416,9 +434,12 @@ Based on the input of Section 5.1.1, change the packet loss rate to 0.5 while ke
 
 As shown in Figure 5-3, since the corruption rate is 0, the reason for timeout at A is that the ACK packet from B to A was lost (marked in yellow); the reason for retransmission at B is that the packet from A to B was lost (marked in green).
 
+
 #### 5.1.4 Error and Loss
 
 Based on the input of Section 5.1.1, change both the packet loss rate and the corruption rate to 0.5, and the following result is obtained:
+
+<img width="585" height="568" alt="image" src="https://github.com/user-attachments/assets/65e71493-f085-46a4-b23b-97253382e235" />
 
 **Figure 5-4** Test result with both error and loss
 
@@ -443,6 +464,8 @@ Network simulation tests were conducted on the Stop-and-Wait protocol. The input
 
 Set the first parameter to 20, the second parameter (packet loss rate) and third parameter (corruption rate) to 0, the fourth parameter to 100 (that is, a time interval of 0.1 s), and the fifth parameter `trace` to its default value 2. The following result segment is obtained:
 
+<img width="785" height="222" alt="image" src="https://github.com/user-attachments/assets/016c197a-4f36-40b7-97aa-0c5fa04760d1" />
+
 **Figure 5-5** Test result with no error and no loss
 
 It can be seen that 20 data packets were successfully sent, and all were correctly transmitted and received. The yellow mark indicates that A sent a packet to layer 3, whose sequence number is `seq = 16`, and the green mark indicates that B correctly received that packet.
@@ -451,9 +474,13 @@ It can be seen that 20 data packets were successfully sent, and all were correct
 
 Based on the input of Section 5.2.1, change the corruption rate to 0.5 while keeping the other inputs unchanged, and the following results are obtained:
 
+<img width="833" height="140" alt="image" src="https://github.com/user-attachments/assets/e3694fb4-0e73-418b-b4dd-743acef16793" />
+
 **Figure 5-6(a)** Data packet error, no loss
 
 Figure 5-6(a) shows that some data packets were corrupted, resulting in `[Sender] TOLAYER3: packet being corrupted` and the corresponding `[Receiver] Packet is corrupted` (both marked in blue).
+
+<img width="833" height="174" alt="image" src="https://github.com/user-attachments/assets/65398358-8e5f-497d-acf5-50509723fd76" />
 
 **Figure 5-6(b)** ACK packet error, no loss
 
@@ -463,9 +490,13 @@ Figure 5-6(b) shows that some returned ACK packets were corrupted, resulting in 
 
 Based on the input of Section 5.2.1, change the packet loss rate to 0.5 while keeping the other inputs unchanged, and the following results are obtained:
 
+<img width="830" height="239" alt="image" src="https://github.com/user-attachments/assets/50abe668-c7e3-4d4f-9ee2-f5e02f490355" />
+
 **Figure 5-7(a)** Data packet loss, no error
 
 As shown in Figure 5-7(a), the sender loses a packet during transmission, namely `[Sender] TOLAYER3: packet being lost`, which then triggers a timeout interrupt because the ACK is not received, causing all packets in the window `[1,2)` to be retransmitted (marked by the blue box at the top of Figure a). After that, the receiver receives the correct packet and sends back an ACK (marked by the blue box at the bottom of Figure a).
+
+<img width="842" height="193" alt="image" src="https://github.com/user-attachments/assets/dd189c5b-27e5-457c-96c9-2aa60afc2a44" />
 
 **Figure 5-7(b)** ACK packet loss, no error
 
@@ -474,6 +505,8 @@ As shown in Figure 5-7(b), after the receiver sends an ACK packet, that ACK is l
 #### 5.2.4 Error and Loss
 
 Based on the input of Section 5.2.1, change both the packet loss rate and corruption rate to 0.5, and the following result is obtained:
+
+<img width="826" height="601" alt="image" src="https://github.com/user-attachments/assets/7cb340aa-0a71-4f6c-b861-3213460e8f11" />
 
 **Figure 5-8** Test result with both error and loss
 
@@ -498,9 +531,3 @@ In this experiment, the design and implementation of reliable data transfer prot
 This was our first practical project related to transport-layer knowledge. Through this RDT programming exercise, we gained a great deal: our practical ability, programming ability, and ability to complete relatively large-scale projects were all improved. It is hoped that in future study, our understanding of computer networks and network programming will continue to deepen, thereby enhancing our technical competence.
 
 During this experiment, I would especially like to thank our teacher and the two teaching assistants for their efforts. Through their explanations of the relevant knowledge and the weekly centralized discussions they organized, we were able to learn more from the classroom, and our ability to write technical reports also improved significantly.
-
- 
-
-## Notes
-
-Some modifications and improvements were made in this report to the work reports of the first two weeks, and these have been marked in yellow in the original document.
