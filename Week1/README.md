@@ -4,3 +4,5 @@
 ```
 prog_sample.sh
 ```
+
+完整方法详见`../report.md`，Week2 同
