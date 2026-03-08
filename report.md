@@ -55,9 +55,15 @@ Based on the requirement analysis, the following FSM diagrams were drawn (as sho
 In the figures, after the sender or receiver jumps from state 0 to state 1, the corresponding values such as `checksum` and `ack` also change. Initially, transmission starts from `seq = 0` and `ack = 0`.
 
 (1) Sender A  
+
+<img width="957" height="858" alt="image" src="https://github.com/user-attachments/assets/b9b16add-95fd-4cab-9713-5da301d3e422" />
+
 **Figure 3-1** FSM diagram of sender A
 
 (2) Receiver B  
+
+<img width="1165" height="566" alt="image" src="https://github.com/user-attachments/assets/510a745e-eff4-4dc0-aef8-777c29119371" />
+
 **Figure 3-2** FSM diagram of receiver B
 
 #### 3.1.2 Implementing the One-Way Go-Back-N Protocol
@@ -66,11 +72,16 @@ Based on the requirement analysis, the following FSM diagrams were drawn.
 
 (1) Sender A
 
+<img width="886" height="684" alt="image" src="https://github.com/user-attachments/assets/20376ec1-c1f9-4254-a037-f82cf21d1ae9" />
+
 **Figure 3-3** FSM diagram of the sender
 
 As shown in Figure 3-3, the sender waits for events to occur. If data packets need to be sent, it determines whether the buffer is full and then calls `tolayer3` to send the packets. If a packet is received, it must determine whether the packet is correct and then perform different operations accordingly, such as moving the window pointer. If a timeout occurs, `timerinterrupt` is called to retransmit all unacknowledged packets after the last correctly received packet.
 
-(2) Receiver B  
+(2) Receiver B 
+
+<img width="974" height="410" alt="image" src="https://github.com/user-attachments/assets/076bc23f-45ab-4ae7-94c8-054ec8fc35d2" />
+
 **Figure 3-4** FSM diagram of the receiver
 
 As shown in Figure 3-4, if the receiver gets a normal packet and its sequence number is also correct, then it extracts the data from the packet and uses `tolayer5` to deliver it upward. Then it encapsulates the outgoing packet, sets values such as `ACK`, and calls `tolayer3` to send it back to the sender.
